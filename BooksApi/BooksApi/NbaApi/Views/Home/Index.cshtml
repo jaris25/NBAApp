@@ -1,0 +1,157 @@
+﻿@model IEnumerable<NbaApi.Models.Standard>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.firstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.temporaryDisplayName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.personId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.teamId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.jersey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.isActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.heightFeet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.heightInches)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.heightMeters)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.weightPounds)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.weightKilograms)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateOfBirthUTC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.myProperty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nbaDebutYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.yearsPro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.collegeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastAffiliation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.country)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.temporaryDisplayName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.personId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.teamId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.jersey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.heightFeet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.heightInches)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.heightMeters)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.weightPounds)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.weightKilograms)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dateOfBirthUTC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.myProperty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nbaDebutYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.yearsPro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.collegeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastAffiliation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.country)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>
