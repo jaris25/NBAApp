@@ -1,15 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NbaApp.Models.PlayersModels;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NbaApi.Models
+namespace NbaApp.Models
 {
     public class PlayersContext : DbContext
     {
-        public DbSet<Standard> Players { get; set; }
+        public DbSet<Player> Players { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        }
 
     }
 }

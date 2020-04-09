@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NbaApi\NbaApi.csproj" />
+    <ProjectReference Include="..\NbaApi\NbaApp.csproj" />
   </ItemGroup>
 
 </Project>

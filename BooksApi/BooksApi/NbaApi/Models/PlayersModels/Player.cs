@@ -1,12 +1,16 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NbaApi.Models
+namespace NbaApp.Models.PlayersModels
 {
-    public class Standard
+    public class Player
     {
+        public int id { get; set; }
+        [JsonProperty(PropertyName = "firstName")]
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string temporaryDisplayName { get; set; }
@@ -24,7 +28,7 @@ namespace NbaApi.Models
         public int? myProperty { get; set; }
         public TeamSite teamSite { get; set; }
         public List<Team> teams { get; set; }
-        public Draft draft { get; set; }
+       // public Draft draft { get; set; }
         public string nbaDebutYear { get; set; }
         public int? yearsPro { get; set; }
         public string collegeName { get; set; }

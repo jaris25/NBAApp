@@ -1,13 +1,13 @@
-﻿using NbaApi.Models;
+﻿using NbaApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NbaApi.Models
+namespace NbaApp.Models.PlayersModels
 {
     public class League
     {
-        public List<Standard> standard { get; set; }
+        public List<Player> standard { get; set; }
     }
 }

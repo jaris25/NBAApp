@@ -1,4 +1,4 @@
-﻿using NbaApi.Models;
+﻿using NbaApp.Models.PlayersModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -16,8 +16,8 @@ namespace ApiTest
     {
         static void Main(string[] args)
         {
-            var data = new Data();
-            Standard player = new Standard();
+            var data = new PlayersData();
+            Player player = new Player();
 
             using (var client = new HttpClient())
             {
@@ -30,7 +30,7 @@ namespace ApiTest
                 var result = responseTask.Result;
                 if (result.IsSuccessStatusCode)
                 {
-                    var readTask = result.Content.ReadAsAsync<Data>();
+                    var readTask = result.Content.ReadAsAsync<PlayersData>();
                     readTask.Wait();
 
                     data = readTask.Result;

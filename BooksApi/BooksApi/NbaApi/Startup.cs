@@ -9,12 +9,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using NbaApi.Models;
-using NbaApi.Services;
+using NbaApp.Models;
+using NbaApp.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 
-namespace NbaApi
+namespace NbaApp
 {
     public class Startup
     {
@@ -27,17 +27,16 @@ namespace NbaApi
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<PlayersContext>(opt =>
-            {
-                opt.UseSqlServer(Configuration.GetConnectionString("ConnectionString"));
-            });
-            services.AddControllers();
+            //services.AddDbContext<PlayersContext>(opt =>
+            //{
+            //    opt.UseSqlServer(Configuration.GetConnectionString("ConnectionString"));
+            //});
 
-            services.Configure<ApiHelper>(
-Configuration.GetSection(nameof(ApiHelper)));
+            services.Configure<ApiService>(
+Configuration.GetSection(nameof(ApiService)));
 
-            services.AddSingleton<IApiHelper>(sp =>
-                sp.GetRequiredService<IOptions<ApiHelper>>().Value);
+            services.AddSingleton<IApiService>(sp =>
+                sp.GetRequiredService<IOptions<ApiService>>().Value);
 
             services.Configure<PlayersDatabaseSettings>(
     Configuration.GetSection(nameof(PlayersDatabaseSettings)));
@@ -52,8 +51,9 @@ Configuration.GetSection(nameof(ApiHelperSettings)));
                 sp.GetRequiredService<IOptions<ApiHelperSettings>>().Value);
 
             services.AddMvc();
+            services.AddControllers();
 
-            services.AddSingleton<PlayersData>();
+            services.AddSingleton<PlayersDataService>();
             services.AddSingleton<PlayersContext>();
 
         }

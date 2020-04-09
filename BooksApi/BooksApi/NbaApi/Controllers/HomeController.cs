@@ -4,17 +4,17 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using NbaApi.Models;
-using NbaApi.Services;
+using NbaApp.Models;
+using NbaApp.Services;
 
-namespace NbaApi.Controllers
+namespace NbaApp.Controllers
 {
     public class HomeController : Controller
     {
 
-        private readonly PlayersData _playersData;
+        private readonly PlayersDataService _playersData;
 
-        public HomeController(PlayersData playersData)
+        public HomeController(PlayersDataService playersData)
         {
             _playersData = playersData;
         }
@@ -22,6 +22,12 @@ namespace NbaApi.Controllers
         {
             var players = _playersData.getAllPlayers();
             return View(players);
+        }
+
+        public IActionResult CareerSummaryDetails(int id)
+        {
+            var summary = _playersData.getCareerSummary(id);
+            return View(summary);
         }
     }
 }
