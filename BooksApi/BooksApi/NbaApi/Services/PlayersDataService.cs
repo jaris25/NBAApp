@@ -22,11 +22,9 @@ namespace NbaApp.Services
         }
         //TODO: Add additional layer in services that will be used in home controller
         //Map players from api call to database model, check automapper (Entities folder)
-        //Check json properties and also class names, because classes are renamed
         public IEnumerable<Player> getAllPlayers()
         {
-            _context.Database.EnsureCreated();
-            // TODO: Standard turetu buti tavo kazkoks modelis o ne NBA Api modelis. 
+            _context.Database.EnsureCreated(); 
             IEnumerable<Player> players = new List<Player>();
             if (_context.Players.Count() == 0)
             {
@@ -45,7 +43,7 @@ namespace NbaApp.Services
         public CareerSummary  getCareerSummary(int id)
         {
             var personId = getPersonId(id);
-            var summary = _apiHelper.loadCareerSummary(_apiHelperSettings.Uri, id);
+            var summary = _apiHelper.loadCareerSummary(_apiHelperSettings.StatsUri, personId);
             return summary;
 
         }
@@ -56,7 +54,7 @@ namespace NbaApp.Services
         public int? getPersonId(int id)
         {
             var player = _context.Players.SingleOrDefault(p => p.id == id);
-            var personId = (int?)player.personId;
+            var personId = (int?)player.PersonId;
             return personId;
         }
 

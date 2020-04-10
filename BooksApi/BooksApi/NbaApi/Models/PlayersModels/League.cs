@@ -1,4 +1,5 @@
 ﻿using NbaApp.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace NbaApp.Models.PlayersModels
 {
     public class League
     {
-        public List<Player> standard { get; set; }
+        [JsonProperty(PropertyName = "standard")]
+        public List<Player> Players { get; set; }
     }
 }

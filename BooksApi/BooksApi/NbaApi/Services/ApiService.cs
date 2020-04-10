@@ -29,8 +29,8 @@ namespace NbaApp.Services
                     readTask.Wait();
 
                     data = readTask.Result;
-                    var league = data.league;
-                    players = league.standard;
+                    var league = data.League;
+                    players = league.Players;
 
                     return players;
                 }
@@ -42,7 +42,7 @@ namespace NbaApp.Services
 
         }
 
-        public CareerSummary loadCareerSummary(string url, int personId)
+        public CareerSummary loadCareerSummary(string url, int? personId)
         {
             using (var client = new HttpClient())
             {
@@ -64,7 +64,7 @@ namespace NbaApp.Services
                     var standard = league.standard;
                     var overalStats = standard.stats;
                     var summary = overalStats.careerSummary;
-
+                    
                     return summary;
                 }
                 else
@@ -80,7 +80,7 @@ namespace NbaApp.Services
     {
         static HttpClient ApiClient { get; set; }
         IEnumerable<Player> loadPlayers(string url);
-        CareerSummary loadCareerSummary(string url, int personId);
+        CareerSummary loadCareerSummary(string url, int? personId);
 
     }
 }

@@ -8,7 +8,6 @@ namespace NbaApp.Models.PlayersModels
 {
     public class Team
     {
-        public int Id { get; set; }
         public int TeamId { get; set; }
         public int SeasonStart { get; set; }
         public int SeasonEnd { get; set; }

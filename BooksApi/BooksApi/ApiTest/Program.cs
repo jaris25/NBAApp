@@ -1,14 +1,9 @@
-﻿using NbaApp.Models.PlayersModels;
-using Newtonsoft.Json;
+﻿using NbaApp.Models;
+using NbaApp.Models.PlayersModels;
+using NbaApp.Models.StatisticsModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using System.Web;
-
 
 namespace ApiTest
 {
@@ -16,34 +11,38 @@ namespace ApiTest
     {
         static void Main(string[] args)
         {
-            var data = new PlayersData();
-            Player player = new Player();
+            var data = new StatsData();
+            PlayersContext context = new PlayersContext();
+            string ppg = null;
 
             using (var client = new HttpClient())
             {
 
 
-                client.BaseAddress = new Uri("http://data.nba.net/10s/prod/v1/2019/players.json");
+                client.BaseAddress = new Uri("http://data.nba.net/data/10s/prod/v1/2016/players/203112_profile.json");
                 var responseTask = client.GetAsync("");
                 responseTask.Wait();
 
                 var result = responseTask.Result;
                 if (result.IsSuccessStatusCode)
                 {
-                    var readTask = result.Content.ReadAsAsync<PlayersData>();
+                    var readTask = result.Content.ReadAsAsync<StatsData>();
                     readTask.Wait();
-
                     data = readTask.Result;
                     var league = data.league;
                     var standard = league.standard;
-                    player = standard.Where(p => p.lastName == "Harden").First();
+                    var stats = standard.stats;
+                    var summary = stats.careerSummary;
+                    ppg = summary.ppg;
+                    
+                    
                 }
                 else
                 {
                     throw new Exception(result.ReasonPhrase);
                 }
             }
-            Console.WriteLine(player.firstName);
+            Console.WriteLine(ppg);
 
             Console.ReadLine();
         }
