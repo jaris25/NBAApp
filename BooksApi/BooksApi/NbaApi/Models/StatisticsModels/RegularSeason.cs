@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace NbaApp.Models.StatisticsModels
 {
     public class RegularSeason
     {
-        public List<Season> season { get; set; }
+        [JsonProperty(PropertyName = "season")]
+        public List<Season> Season { get; set; }
     }
 }

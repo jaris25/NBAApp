@@ -1,10 +1,8 @@
 ﻿using NbaApp.Models;
 using NbaApp.Models.PlayersModels;
 using NbaApp.Models.StatisticsModels;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace NbaApp.Services
 {
@@ -21,29 +19,16 @@ namespace NbaApp.Services
             _context = context;
         }
         //TODO: Add additional layer in services that will be used in home controller
-        //Map players from api call to database model, check automapper (Entities folder)
         public IEnumerable<Player> getAllPlayers()
         {
-            _context.Database.EnsureCreated(); 
-            IEnumerable<Player> players = new List<Player>();
-            if (_context.Players.Count() == 0)
-            {
-                players = _apiHelper.loadPlayers(_apiHelperSettings.Uri);
-                _context.AddRange(players);
-                _context.SaveChanges();
-            }
-            else
-            {
-                players = _context.Players.ToList();
-            }
-
+            var players = _context.Players.ToList();
             return players;
         }
 
-        public CareerSummary  getCareerSummary(int id)
+        public CareerSummary GetCareerSummary(int id)
         {
-            var personId = getPersonId(id);
-            var summary = _apiHelper.loadCareerSummary(_apiHelperSettings.StatsUri, personId);
+            var personId = GetPersonId(id);
+            var summary = _apiHelper.LoadCareerSummary(_apiHelperSettings.StatsUri, personId, _apiHelperSettings.UriExtension);
             return summary;
 
         }
@@ -51,7 +36,7 @@ namespace NbaApp.Services
 
         //if property is nullable is it ok to call method like this? I had an error 
         //that the value is null so i had to make them null despite the fact that person id always exists.
-        public int? getPersonId(int id)
+        public int? GetPersonId(int id)
         {
             var player = _context.Players.SingleOrDefault(p => p.id == id);
             var personId = (int?)player.PersonId;

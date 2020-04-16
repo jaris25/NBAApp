@@ -1,43 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
 namespace NbaApp.Models.StatisticsModels
 {
     public class Team
     {
-        public string teamId { get; set; }
-        public string ppg { get; set; }
-        public string rpg { get; set; }
-        public string apg { get; set; }
-        public string mpg { get; set; }
-        public string topg { get; set; }
-        public string spg { get; set; }
-        public string bpg { get; set; }
-        public string tpp { get; set; }
-        public string ftp { get; set; }
-        public string fgp { get; set; }
-        public string assists { get; set; }
-        public string blocks { get; set; }
-        public string steals { get; set; }
-        public string turnovers { get; set; }
-        public string offReb { get; set; }
-        public string defReb { get; set; }
-        public string totReb { get; set; }
-        public string fgm { get; set; }
-        public string fga { get; set; }
-        public string tpm { get; set; }
-        public string tpa { get; set; }
-        public string ftm { get; set; }
-        public string fta { get; set; }
-        public string pFouls { get; set; }
-        public string points { get; set; }
-        public string gamesPlayed { get; set; }
-        public string gamesStarted { get; set; }
-        public string plusMinus { get; set; }
-        public string min { get; set; }
-        public string dd2 { get; set; }
-        public string td3 { get; set; }
+        [JsonProperty(PropertyName = "ppg")]
+        public string Ppg { get; set; }
+        [JsonProperty(PropertyName = "rpg")]
+        public string Rpg { get; set; }
+        [JsonProperty(PropertyName = "apg")]
+        public string Apg { get; set; }
+        [JsonProperty(PropertyName = "mpg")]
+        public string Mpg { get; set; }
+        [JsonProperty(PropertyName = "topg")]
+        public string Topg { get; set; }
+        [JsonProperty(PropertyName = "spg")]
+        public string Spg { get; set; }
+        [JsonProperty(PropertyName = "bpg")]
+        public string Bpg { get; set; }
+        [JsonProperty(PropertyName = "tpp")]
+        public string Tpp { get; set; }
+        [JsonProperty(PropertyName = "ftp")]
+        public string Ftp { get; set; }
+        [JsonProperty(PropertyName = "fgp")]
+        public string Fgp { get; set; }
+        [JsonProperty(PropertyName = "assists")]
+        public string Assists { get; set; }
+        [JsonProperty(PropertyName = "blocks")]
+        public string Blocks { get; set; }
+        [JsonProperty(PropertyName = "steals")]
+        public string Steals { get; set; }
+        [JsonProperty(PropertyName = "turnovers")]
+        public string Turnovers { get; set; }
+        [JsonProperty(PropertyName = "offReb")]
+        public string OffReb { get; set; }
+        [JsonProperty(PropertyName = "defReb")]
+        public string DefReb { get; set; }
+        [JsonProperty(PropertyName = "totReb")]
+        public string TotReb { get; set; }
+        [JsonProperty(PropertyName = "fgm")]
+        public string Fgm { get; set; }
+        [JsonProperty(PropertyName = "fga")]
+        public string Fga { get; set; }
+        [JsonProperty(PropertyName = "tpm")]
+        public string Tpm { get; set; }
+        [JsonProperty(PropertyName = "tpa")]
+        public string Tpa { get; set; }
+        [JsonProperty(PropertyName = "ftm")]
+        public string Ftm { get; set; }
+        [JsonProperty(PropertyName = "fta")]
+        public string Fta { get; set; }
+        [JsonProperty(PropertyName = "Pfouls")]
+        public string PFouls { get; set; }
+        [JsonProperty(PropertyName = "points")]
+        public string Points { get; set; }
+        [JsonProperty(PropertyName = "gamesPlayed")]
+        public string GamesPlayed { get; set; }
+        [JsonProperty(PropertyName = "gamesStarted")]
+        public string GamesStarted { get; set; }
+        [JsonProperty(PropertyName = "plusMinus")]
+        public string PlusMinus { get; set; }
+        [JsonProperty(PropertyName = "min")]
+        public string Min { get; set; }
+        [JsonProperty(PropertyName = "dd2")]
+        public string Dd2 { get; set; }
+        [JsonProperty(PropertyName = "td3")]
+        public string Td3 { get; set; }
     }
 }

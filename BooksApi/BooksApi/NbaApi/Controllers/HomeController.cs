@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using NbaApp.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 using NbaApp.Services;
 
 namespace NbaApp.Controllers
@@ -26,7 +20,7 @@ namespace NbaApp.Controllers
 
         public IActionResult CareerSummaryDetails(int id)
         {
-            var summary = _playersData.getCareerSummary(id);
+            var summary = _playersData.GetCareerSummary(id);
             return View(summary);
         }
     }

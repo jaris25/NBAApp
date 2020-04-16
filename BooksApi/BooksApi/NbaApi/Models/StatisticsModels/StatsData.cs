@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
 
 namespace NbaApp.Models.StatisticsModels
 {
     public class StatsData
     {
-        public League league { get; set; }
+        [JsonProperty(PropertyName = "league")]
+        public League League { get; set; }
     }
 }

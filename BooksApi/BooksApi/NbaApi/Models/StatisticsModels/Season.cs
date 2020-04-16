@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace NbaApp.Models.StatisticsModels
 {
     public class Season
     {
-        public int seasonYear { get; set; }
-        public List<Team> teams { get; set; }
-        public Total total { get; set; }
+        [JsonProperty(PropertyName = "seasonYear")]
+        public int SeasonYear { get; set; }
+        [JsonProperty(PropertyName = "teams")]
+        public List<Team> Teams { get; set; }
+        [JsonProperty(PropertyName = "total")]
+        public Total Total { get; set; }
     }
 }

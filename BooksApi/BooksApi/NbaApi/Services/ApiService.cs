@@ -2,21 +2,18 @@
 using NbaApp.Models.StatisticsModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace NbaApp.Services
 {
     public class ApiService : IApiService
     {
 
-        public IEnumerable<Player> loadPlayers(string url)
+        public IEnumerable<Player> LoadPlayers(string url)
         {
             using (var client = new HttpClient())
             {
                 var data = new PlayersData();
-                IEnumerable<Player> players = new List<Player>();
 
                 client.BaseAddress = new Uri(url);
                 var responseTask = client.GetAsync("");
@@ -30,7 +27,7 @@ namespace NbaApp.Services
 
                     data = readTask.Result;
                     var league = data.League;
-                    players = league.Players;
+                    var players = league.Players;
 
                     return players;
                 }
@@ -42,15 +39,14 @@ namespace NbaApp.Services
 
         }
 
-        public CareerSummary loadCareerSummary(string url, int? personId)
+        public CareerSummary LoadCareerSummary(string url, int? personId, string urlExtension)
         {
             using (var client = new HttpClient())
             {
                 var data = new StatsData();
-                IEnumerable<CareerSummary> statistics = new List<CareerSummary>();
 
                 client.BaseAddress = new Uri(url);
-                var responseTask = client.GetAsync(url + personId + "_profile.json");
+                var responseTask = client.GetAsync(url + personId + urlExtension);
                 responseTask.Wait();
 
                 var result = responseTask.Result;
@@ -60,11 +56,11 @@ namespace NbaApp.Services
                     readTask.Wait();
 
                     data = readTask.Result;
-                    var league = data.league;
-                    var standard = league.standard;
-                    var overalStats = standard.stats;
-                    var summary = overalStats.careerSummary;
-                    
+                    var league = data.League;
+                    var standard = league.Standard;
+                    var overalStats = standard.Stats;
+                    var summary = overalStats.CareerSummary;
+
                     return summary;
                 }
                 else
@@ -74,13 +70,14 @@ namespace NbaApp.Services
             }
         }
 
+
     }
 
     public interface IApiService
     {
-        static HttpClient ApiClient { get; set; }
-        IEnumerable<Player> loadPlayers(string url);
-        CareerSummary loadCareerSummary(string url, int? personId);
+        //static HttpClient ApiClient { get; set; }
+        IEnumerable<Player> LoadPlayers(string url);
+        CareerSummary LoadCareerSummary(string url, int? personId, string urlExtension);
 
     }
 }
