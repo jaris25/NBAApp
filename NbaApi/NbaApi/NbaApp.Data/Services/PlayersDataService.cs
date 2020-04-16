@@ -1,10 +1,10 @@
-﻿using NbaApp.Models;
-using NbaApp.Models.PlayersModels;
-using NbaApp.Models.StatisticsModels;
+﻿using NbaApp.Data.Models;
+using NbaApp.Data.Models.PlayersModels;
+using NbaApp.Data.Models.StatisticsModels;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NbaApp.Services
+namespace NbaApp.Data.Services
 {
     public class PlayersDataService
     {

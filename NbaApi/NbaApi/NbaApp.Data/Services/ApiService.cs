@@ -1,10 +1,10 @@
-﻿using NbaApp.Models.PlayersModels;
-using NbaApp.Models.StatisticsModels;
+﻿using NbaApp.Data.Models.PlayersModels;
+using NbaApp.Data.Models.StatisticsModels;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 
-namespace NbaApp.Services
+namespace NbaApp.Data.Services
 {
     public class ApiService : IApiService
     {

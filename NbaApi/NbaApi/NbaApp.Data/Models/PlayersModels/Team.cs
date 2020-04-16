@@ -1,4 +1,4 @@
-﻿namespace NbaApp.Models.PlayersModels
+﻿namespace NbaApp.Data.Models.PlayersModels
 {
     public class Team
     {

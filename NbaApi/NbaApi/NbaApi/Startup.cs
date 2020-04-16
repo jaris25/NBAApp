@@ -9,10 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using NbaApp.Models;
-using NbaApp.Services;
-using Microsoft.EntityFrameworkCore;
-using System.Configuration;
+using NbaApp.Data.Services;
+using NbaApp.Data.Models;
 
 namespace NbaApp
 {

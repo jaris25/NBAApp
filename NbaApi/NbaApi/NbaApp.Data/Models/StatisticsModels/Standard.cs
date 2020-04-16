@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace NbaApp.Models.StatisticsModels
+namespace NbaApp.Data.Models.StatisticsModels
 {
     public class Standard
     {

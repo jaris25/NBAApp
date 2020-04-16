@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace NbaApp.Models.StatisticsModels
+namespace NbaApp.Data.Models.StatisticsModels
 {
     public class Season
     {

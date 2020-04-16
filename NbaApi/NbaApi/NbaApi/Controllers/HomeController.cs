@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NbaApp.Services;
+using NbaApp.Data.Services;
 
 namespace NbaApp.Controllers
 {

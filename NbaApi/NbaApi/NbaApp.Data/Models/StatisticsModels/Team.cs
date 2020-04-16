@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace NbaApp.Models.StatisticsModels
+namespace NbaApp.Data.Models.StatisticsModels
 {
-    public class Total
+    public class Team
     {
         [JsonProperty(PropertyName = "ppg")]
         public string Ppg { get; set; }

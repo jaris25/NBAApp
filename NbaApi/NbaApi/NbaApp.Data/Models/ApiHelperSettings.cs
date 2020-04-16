@@ -1,4 +1,4 @@
-﻿namespace NbaApp.Models
+﻿namespace NbaApp.Data.Models
 {
     public class ApiHelperSettings:IApiHelperSettings
     {

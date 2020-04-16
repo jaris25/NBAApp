@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NbaApp.Models.PlayersModels;
-
-namespace NbaApp.Models
+using NbaApp.Data.Models.PlayersModels;
+namespace NbaApp.Data.Models
 {
     public class PlayersContext : DbContext
     {
@@ -16,6 +15,7 @@ namespace NbaApp.Models
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_playersDatabaseSettings.ConnectionString);
+            
         }
 
     }

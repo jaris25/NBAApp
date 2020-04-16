@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
-namespace NbaApp.Models.PlayersModels
+namespace NbaApp.Data.Models.PlayersModels
 {
 
     public class Player
