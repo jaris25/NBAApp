@@ -8,7 +8,7 @@ namespace NbaApp.Services
 {
     public class ApiService : IApiService
     {
-
+        //This method was used during the first application run to load players to localDb
         public IEnumerable<Player> LoadPlayers(string url)
         {
             using (var client = new HttpClient())
@@ -75,7 +75,6 @@ namespace NbaApp.Services
 
     public interface IApiService
     {
-        //static HttpClient ApiClient { get; set; }
         IEnumerable<Player> LoadPlayers(string url);
         CareerSummary LoadCareerSummary(string url, int? personId, string urlExtension);
 
