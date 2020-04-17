@@ -36,7 +36,6 @@ namespace NbaApp.Data.Services
                     throw new Exception(result.ReasonPhrase);
                 }
             }
-
         }
 
         public CareerSummary LoadCareerSummary(string url, int? personId, string urlExtension)
@@ -69,14 +68,5 @@ namespace NbaApp.Data.Services
                 }
             }
         }
-
-
-    }
-
-    public interface IApiService
-    {
-        IEnumerable<Player> LoadPlayers(string url);
-        CareerSummary LoadCareerSummary(string url, int? personId, string urlExtension);
-
     }
 }

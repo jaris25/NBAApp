@@ -1,5 +1,5 @@
-﻿using NbaApp.Data.Models;
-using NbaApp.Data.Models.PlayersModels;
+﻿using NbaApp.Data.Models.PlayersModels;
+using NbaApp.Data.Models.Settings;
 using NbaApp.Data.Models.StatisticsModels;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +31,12 @@ namespace NbaApp.Data.Services
             var summary = _apiHelper.LoadCareerSummary(_apiHelperSettings.StatsUri, personId, _apiHelperSettings.UriExtension);
             return summary;
 
+        }
+
+        public IEnumerable<Player> GetPlayerByName(string name)
+        {
+            var players = _context.Players.Where(p => p.LastName == name || p.FirstName == name).ToList();
+            return players;
         }
 
 

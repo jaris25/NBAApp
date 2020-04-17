@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NbaApp.Data.Models.PlayersModels;
-namespace NbaApp.Data.Models
+using NbaApp.Data.Models.Settings;
+
+namespace NbaApp.Data.Services
 {
     public class PlayersContext : DbContext
     {

@@ -23,5 +23,11 @@ namespace NbaApp.Controllers
             var summary = _playersData.GetCareerSummary(id);
             return View(summary);
         }
+
+        public IActionResult GetPlayerByName(string playerName)
+        {
+            var player = _playersData.GetPlayerByName(playerName);
+            return View(player);
+        }
     }
 }
