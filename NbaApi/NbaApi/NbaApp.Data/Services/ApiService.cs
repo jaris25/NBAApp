@@ -3,23 +3,21 @@ using NbaApp.Data.Models.StatisticsModels;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace NbaApp.Data.Services
 {
     public class ApiService : IApiService
     {
         //This method was used during the first application run to load players to localDb
-        public IEnumerable<Player> LoadPlayers(string url)
+        public async Task<IEnumerable<Player>> LoadPlayers(string url)
         {
             using (var client = new HttpClient())
             {
                 var data = new PlayersData();
 
                 client.BaseAddress = new Uri(url);
-                var responseTask = client.GetAsync("");
-                responseTask.Wait();
-
-                var result = responseTask.Result;
+                var result = await client.GetAsync("");
                 if (result.IsSuccessStatusCode)
                 {
                     var readTask = result.Content.ReadAsAsync<PlayersData>();
@@ -38,24 +36,20 @@ namespace NbaApp.Data.Services
             }
         }
 
-        public CareerSummary LoadCareerSummary(string url, int? personId, string urlExtension)
+        public async Task<CareerSummary> LoadCareerSummary(string url, int? personId, string urlExtension)
         {
             using (var client = new HttpClient())
             {
                 var data = new StatsData();
 
                 client.BaseAddress = new Uri(url);
-                var responseTask = client.GetAsync(url + personId + urlExtension);
-                responseTask.Wait();
-
-                var result = responseTask.Result;
+                var result = await client.GetAsync(url + personId + urlExtension);
+                
                 if (result.IsSuccessStatusCode)
                 {
-                    var readTask = result.Content.ReadAsAsync<StatsData>();
-                    readTask.Wait();
-
-                    data = readTask.Result;
-                    var league = data.League;
+                    var readTask = await result.Content.ReadAsAsync<StatsData>();
+                    
+                    var league = readTask.League;
                     var standard = league.Standard;
                     var overalStats = standard.Stats;
                     var summary = overalStats.CareerSummary;
@@ -64,7 +58,7 @@ namespace NbaApp.Data.Services
                 }
                 else
                 {
-                    throw new Exception(result.ReasonPhrase);
+                    return null;
                 }
             }
         }

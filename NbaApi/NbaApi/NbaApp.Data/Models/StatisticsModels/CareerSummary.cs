@@ -1,9 +1,14 @@
-﻿using Newtonsoft.Json;
+﻿using NbaApp.Data.Models.PlayersModels;
+using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NbaApp.Data.Models.StatisticsModels
 {
     public class CareerSummary
     {
+        [Key]
+        public int id { get; set; }
         [JsonProperty(PropertyName = "tpp")]
         public string Tpp { get; set; }
         [JsonProperty(PropertyName = "ftp")]
@@ -60,6 +65,9 @@ namespace NbaApp.Data.Models.StatisticsModels
         public string PlusMinus { get; set; }
         [JsonProperty(PropertyName = "min")]
         public string Min { get; set; }
+        [ForeignKey("Player")]
+        public int PlayerId { get; set; }
+        public Player Player { get; set; }
 
     }
 }

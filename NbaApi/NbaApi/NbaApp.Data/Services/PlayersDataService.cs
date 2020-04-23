@@ -3,6 +3,7 @@ using NbaApp.Data.Models.Settings;
 using NbaApp.Data.Models.StatisticsModels;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace NbaApp.Data.Services
 {
@@ -27,10 +28,26 @@ namespace NbaApp.Data.Services
 
         public CareerSummary GetCareerSummary(int id)
         {
-            var personId = GetPersonId(id);
-            var summary = _apiHelper.LoadCareerSummary(_apiHelperSettings.StatsUri, personId, _apiHelperSettings.UriExtension);
+            var player = _context.Players.First(p => p.id == id);
+            var summary = _context.CareerSummaries.First(s => s.Player == player);
             return summary;
+        }
 
+        public async Task addAllCareerSummaries()
+        {
+            var players = _context.Players.ToList();
+            foreach (var player in players)
+            {
+                var personId = player.PersonId;
+
+                var summary = await _apiHelper.LoadCareerSummary(_apiHelperSettings.StatsUri, personId, _apiHelperSettings.UriExtension);
+                if (summary != null)
+                {
+                    summary.Player = player;
+                    _context.CareerSummaries.Add(summary);
+                    _context.SaveChanges();
+                }
+            }
         }
 
         public IEnumerable<Player> GetPlayerByName(string name)

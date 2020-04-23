@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NbaApp.Data.Services;
+using System.Threading.Tasks;
 
 namespace NbaApp.Controllers
 {
@@ -14,15 +15,14 @@ namespace NbaApp.Controllers
         }
         public IActionResult Index()
         {
+           
             var players = _playersData.getAllPlayers();
             return View(players);
         }
 
         public IActionResult CareerSummaryDetails(int id)
-        {
-            var summary = _playersData.GetCareerSummary(id);
-            return View(summary);
-        }
+            => View(_playersData.GetCareerSummary(id));
+
 
         public IActionResult GetPlayerByName(string playerName)
         {
