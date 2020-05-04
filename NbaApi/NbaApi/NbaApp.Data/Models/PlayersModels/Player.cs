@@ -7,7 +7,7 @@ namespace NbaApp.Data.Models.PlayersModels
     public class Player
     {
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
         [JsonProperty(PropertyName ="firstName")]
         public string FirstName { get; set; }
         [JsonProperty(PropertyName = "lastName")]
@@ -15,7 +15,7 @@ namespace NbaApp.Data.Models.PlayersModels
         [JsonProperty(PropertyName = "temporaryDisplayName")]
         public string TemporaryDisplayName { get; set; }
         [JsonProperty(PropertyName = "personId")]
-        public int? PersonId { get; set; }
+        public int PersonId { get; set; }
         [JsonProperty(PropertyName = "TeamId")]
         public int? TeamId { get; set; }
         [JsonProperty(PropertyName = "jersey")]

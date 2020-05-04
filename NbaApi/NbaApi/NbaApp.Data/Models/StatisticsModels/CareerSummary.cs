@@ -8,7 +8,7 @@ namespace NbaApp.Data.Models.StatisticsModels
     public class CareerSummary
     {
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
         [JsonProperty(PropertyName = "tpp")]
         public string Tpp { get; set; }
         [JsonProperty(PropertyName = "ftp")]

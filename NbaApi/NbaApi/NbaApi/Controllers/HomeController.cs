@@ -7,27 +7,21 @@ namespace NbaApp.Controllers
     public class HomeController : Controller
     {
 
-        private readonly PlayersDataService _playersData;
+        private readonly IPlayersDataService _playersDataService;
 
-        public HomeController(PlayersDataService playersData)
+        public HomeController(IPlayersDataService playersDataService)
         {
-            _playersData = playersData;
+            _playersDataService = playersDataService;
         }
-        public IActionResult Index()
-        {
-           
-            var players = _playersData.getAllPlayers();
-            return View(players);
-        }
+        public async Task<IActionResult> Index()
+            => View(await _playersDataService.GetAllPlayers());
 
-        public IActionResult CareerSummaryDetails(int id)
-            => View(_playersData.GetCareerSummary(id));
+        public async Task<IActionResult> CareerSummaryDetails(int id)
+            => View(await _playersDataService.GetCareerSummary(id));
 
 
-        public IActionResult GetPlayerByName(string playerName)
-        {
-            var player = _playersData.GetPlayerByName(playerName);
-            return View(player);
-        }
+        public async Task<IActionResult> GetPlayerByName(string playerName)
+            => View(await _playersDataService.GetPlayersByName(playerName));
+
     }
 }

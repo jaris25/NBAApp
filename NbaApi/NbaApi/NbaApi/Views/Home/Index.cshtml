@@ -16,7 +16,7 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.id)
+                    @Html.DisplayNameFor(model => model.Id)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.FirstName)
@@ -83,7 +83,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.id)
+                        @Html.DisplayFor(modelItem => item.Id)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.FirstName)
@@ -144,7 +144,7 @@
                     </td>
                     <td>
 
-                        @Html.ActionLink("CareerSummaryDetails", "CareerSummaryDetails", new { id = item.id })
+                        @Html.ActionLink("CareerSummaryDetails", "CareerSummaryDetails", new { id = item.Id })
                     </td>
                 </tr>
             }

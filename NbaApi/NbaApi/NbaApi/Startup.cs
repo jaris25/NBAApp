@@ -20,16 +20,11 @@ namespace NbaApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<PlayersContext>(opt =>
-            //{
-            //    opt.UseSqlServer(Configuration.GetConnectionString("ConnectionString"));
-            //});
-
             services.Configure<ApiService>(
 Configuration.GetSection(nameof(ApiService)));
 
-            services.AddSingleton<IApiService>(sp =>
-                sp.GetRequiredService<IOptions<ApiService>>().Value);
+            //services.AddSingleton<IApiService>(sp =>
+            //    sp.GetRequiredService<IOptions<ApiService>>().Value);
 
             services.Configure<PlayersDatabaseSettings>(
     Configuration.GetSection(nameof(PlayersDatabaseSettings)));
@@ -42,12 +37,14 @@ Configuration.GetSection(nameof(ApiHelperSettings)));
 
             services.AddSingleton<IApiHelperSettings>(sp =>
                 sp.GetRequiredService<IOptions<ApiHelperSettings>>().Value);
+            services.AddHttpClient<IApiService, ApiService>();
+
+            services.AddSingleton<IPlayersDataService, PlayersDataService>();
+            //services.AddSingleton<IApiService, ApiService>();
+            services.AddSingleton<PlayersContext>();
 
             services.AddMvc();
             services.AddControllers();
-
-            services.AddSingleton<PlayersDataService>();
-            services.AddSingleton<PlayersContext>();
 
         }
 

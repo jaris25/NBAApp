@@ -10,6 +10,6 @@ namespace NbaApp.Data.Services
     public interface IApiService
     {
         Task<IEnumerable<Player>> LoadPlayers(string url);
-        Task<CareerSummary> LoadCareerSummary(string url, int? personId, string urlExtension);
+        Task<CareerSummary> LoadCareerSummary(string url, int personId, string urlExtension);
     }
 }
