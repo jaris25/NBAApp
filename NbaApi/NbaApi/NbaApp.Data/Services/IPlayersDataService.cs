@@ -1,4 +1,5 @@
-﻿using NbaApp.Data.Models.PlayersModels;
+﻿using NbaApp.Data.Models.Filtering;
+using NbaApp.Data.Models.PlayersModels;
 using NbaApp.Data.Models.StatisticsModels;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace NbaApp.Data.Services
         Task<IEnumerable<Player>> GetAllPlayers() ;
         Task<CareerSummary> GetCareerSummary(int id);
         Task<IEnumerable<Player>> GetPlayersByName(string name);
-        Task<int> GetPersonId(int id);
+        public IEnumerable<DisplayFilteredStatsModel> FilterStats(FilterStatsValues values, string value);
 
 
     }

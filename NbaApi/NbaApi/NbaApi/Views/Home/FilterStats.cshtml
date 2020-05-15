@@ -1,0 +1,49 @@
+﻿@model NbaApp.Data.Models.Filtering.FilterStatsModel
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>FilterStats</title>
+</head>
+<body>
+
+    <h4>FilterStatsModel</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="FilterStats">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FilterStatsValues, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.ValidationMessageFor(model => model.FilterStatsValues, "", new { @class = "text-danger" })
+                        <select asp-for="FilterStatsValues" asp-items="Html.GetEnumSelectList<NbaApp.Data.Models.Filtering.FilterStatsValues>()"></select>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ValueToCompare, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ValueToCompare, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ValueToCompare, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<NbaApp.Data.Models.Filtering.DisplayFilteredStatsModel>
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View1</title>
+</head>
+<body>
+
+    <div>
+        <h4>DisplayFilteredStatsModel</h4>
+        <hr />
+        <dl class="row">
+
+        </dl>
+    </div>
+    @foreach (var item in Model)
+    {
+        @await Html.PartialAsync("_FilteredStats", item)
+    }
+
+    <div>
+
+        <a asp-action="Index">Back to List</a>
+    </div>
+</body>
+</html>
