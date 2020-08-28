@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using NbaApp.Data.Models.Settings;
 using NbaApp.Data.Services;
+using NbaApp.Data.Services.FilteringServices;
 
 namespace NbaApp
 {
@@ -40,8 +41,8 @@ Configuration.GetSection(nameof(ApiHelperSettings)));
             services.AddHttpClient<IApiService, ApiService>();
 
             services.AddSingleton<IPlayersDataService, PlayersDataService>();
-            //services.AddSingleton<IApiService, ApiService>();
             services.AddSingleton<PlayersContext>();
+            services.AddSingleton<FilterEngine>();
 
             services.AddMvc();
             services.AddControllers();

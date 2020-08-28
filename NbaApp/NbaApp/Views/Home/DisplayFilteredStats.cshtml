@@ -17,11 +17,12 @@
         <h4>DisplayFilteredStatsModel</h4>
         <hr />
         <dl class="row">
-
         </dl>
     </div>
     @foreach (var item in Model)
     {
+
+        
         @await Html.PartialAsync("_FilteredStats", item)
     }
 

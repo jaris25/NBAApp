@@ -6,10 +6,10 @@ namespace NbaApp.Data.Models.Filtering
 {
     public class FilterStatsModel
     {
-        public FilterStatsValues FilterStatsValues { get; set; }
+        public StatsCategory StatsCategory { get; set; }
         public string ValueToCompare { get; set; }
     }
-    public enum FilterStatsValues
+    public enum StatsCategory
     {
         Ppg,
         Rpg,

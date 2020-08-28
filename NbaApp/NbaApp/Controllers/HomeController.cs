@@ -2,7 +2,9 @@
 using NbaApp.Data.Models.Filtering;
 using NbaApp.Data.Models.StatisticsModels;
 using NbaApp.Data.Services;
+using NbaApp.Data.Services.FilteringServices;
 using Newtonsoft.Json;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,10 +14,12 @@ namespace NbaApp.Controllers
     {
 
         private readonly IPlayersDataService _playersDataService;
+        private readonly FilterEngine _filterEngine;
 
-        public HomeController(IPlayersDataService playersDataService)
+        public HomeController(IPlayersDataService playersDataService, FilterEngine filterEngine)
         {
             _playersDataService = playersDataService;
+            _filterEngine = filterEngine;
         }
         public async Task<IActionResult> Index()
             => View(await _playersDataService.GetAllPlayers());
@@ -26,20 +30,8 @@ namespace NbaApp.Controllers
         [HttpPost]
         public IActionResult FilterStats(FilterStatsModel filterStatsModel)
         {
-            var filteredStats = _playersDataService.FilterStats(filterStatsModel.FilterStatsValues, filterStatsModel.ValueToCompare);
-            //TempData["FilterStatsModel"] = JsonConvert.SerializeObject(filteredStats);
-            TempData.Put("Key", filteredStats);
-            //TempData["FilterStatsModel"] = filteredStats;
-            return RedirectToAction("DisplayFilteredStats");
-        }
-        
-        //The value is not passed to the model.
-        public IActionResult DisplayFilteredStats()
-        {
-            var model = TempData.Get<IEnumerable<DisplayFilteredStatsModel>>("Key");
-
-            //var modelis = JsonConvert.DeserializeObject<List<DisplayFilteredStatsModel>>(TempData["FilterStatsModel"]);
-            return View(model);
+            var filteredStats = _filterEngine.filterStatsCategory(filterStatsModel.StatsCategory, filterStatsModel.ValueToCompare);
+            return View("DisplayFilteredStats", filteredStats);
         }
 
         public async Task<IActionResult> CareerSummaryDetails(int id)

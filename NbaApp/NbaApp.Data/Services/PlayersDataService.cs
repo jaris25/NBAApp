@@ -61,33 +61,61 @@ namespace NbaApp.Data.Services
             return players;
         }
 
-        public IEnumerable<DisplayFilteredStatsModel> FilterStats(FilterStatsValues values, string value)
-        {
-            var list = new List<DisplayFilteredStatsModel>();
+        //public IEnumerable<DisplayFilteredStatsModel> FilterStats(StatsCategory parameter, string valueToCompare)
+        //{
+        //    var list = new List<DisplayFilteredStatsModel>();
+        //    var display = new DisplayFilteredStatsModel();
 
-            switch (values)
-            {
-                case FilterStatsValues.Apg:
-                    {
-                        var summaryList = _context.CareerSummaries.Where(s => Convert.ToDouble(s.Apg) >= Convert.ToDouble(value)).ToList();
-                        foreach (var item in summaryList)
-                        {
-                            var display = new DisplayFilteredStatsModel();
-                            display.CareerSummary = item;
-                            display.Player = item.Player;
-                            list.Add(display);
-                        }
-                        break;
+        //    switch (parameter)
+        //    {
+        //        case StatsCategory.Apg:
+        //            {
+        //                var summaryList = _context.CareerSummaries.Where(s => Convert.ToDouble(s.Apg) >= Convert.ToDouble(valueToCompare)).ToList();
+        //                foreach (var item in summaryList)
+        //                {
+        //                    display.CareerSummary = item;
+        //                    display.Player = item.Player;
+        //                    list.Add(display);
+        //                }
+        //                break;
 
-                    }
-                case FilterStatsValues.Ppg:
-                    {
-                        _context.CareerSummaries.Where(s => Convert.ToDouble(s.Ppg) >= Convert.ToDouble(value));
-                        break;
-                    }
-            }
-            return list;
+        //            }
+        //        case StatsCategory.Ppg:
+        //            {
+        //                var summaryList = _context.CareerSummaries.Where(s => Convert.ToDouble(s.Ppg) >= Convert.ToDouble(valueToCompare));
+        //                foreach (var item in summaryList)
+        //                {
+        //                    display.CareerSummary = item;
+        //                    display.Player = item.Player;
+        //                    list.Add(display);
+        //                }
+        //                break;
+        //            }
+        //        case StatsCategory.Rpg:
+        //            {
+        //                var summaryList = _context.CareerSummaries.Where(s => Convert.ToDouble(s.Rpg) >= Convert.ToDouble(valueToCompare));
+        //                foreach (var item in summaryList)
+        //                {
+        //                    display.CareerSummary = item;
+        //                    display.Player = item.Player;
+        //                    list.Add(display);
+        //                }
+        //                break;
+        //            }
+        //        case StatsCategory.Spg:
+        //            {
+        //                var summaryList = _context.CareerSummaries.Where(s => Convert.ToDouble(s.Spg) >= Convert.ToDouble(valueToCompare));
+        //                foreach (var item in summaryList)
+        //                {
+        //                    display.CareerSummary = item;
+        //                    display.Player = item.Player;
+        //                    list.Add(display);
+        //                }
+        //                break;
+        //            }
+        //    }
+        //    return list;
 
-        }
+        //}
     }
 }
