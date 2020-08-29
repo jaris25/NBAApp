@@ -1,21 +1,24 @@
-﻿using NbaApp.Data.Models.Filtering;
+﻿using Microsoft.EntityFrameworkCore;
+using NbaApp.Data.Models.Filtering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace NbaApp.Data.Services.FilteringServices
 {
     public static class AssistsFilter
     {
-        public static IEnumerable<DisplayFilteredStatsModel> FilterAssists(string valueToCompare, PlayersContext context)
+        public static async Task<IEnumerable<DisplayFilteredStatsModel>> FilterAssists(string valueToCompare, PlayersContext context)
         {
             var list = new List<DisplayFilteredStatsModel>();
-            var display = new DisplayFilteredStatsModel();
+            
 
-            var summaryList = context.CareerSummaries.Where(s => Convert.ToDouble(s.Apg) >= Convert.ToDouble(valueToCompare)).ToList();
+            var summaryList = await context.CareerSummaries.Where(s => Convert.ToDouble(s.Apg) >= Convert.ToDouble(valueToCompare)).ToListAsync();
             foreach (var item in summaryList)
             {
+                var display = new DisplayFilteredStatsModel();
                 display.CareerSummary = item;
                 display.Player = item.Player;
                 list.Add(display);

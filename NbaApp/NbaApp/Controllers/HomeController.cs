@@ -28,17 +28,27 @@ namespace NbaApp.Controllers
         public IActionResult FilterStats() => View();
 
         [HttpPost]
-        public IActionResult FilterStats(FilterStatsModel filterStatsModel)
+        public async Task<IActionResult> FilterStats(FilterStatsModel filterStatsModel)
         {
-            var filteredStats = _filterEngine.filterStatsCategory(filterStatsModel.StatsCategory, filterStatsModel.ValueToCompare);
+            var filteredStats = await _filterEngine.filterStatsCategory(filterStatsModel.StatsCategory, filterStatsModel.ValueToCompare);
             return View("DisplayFilteredStats", filteredStats);
         }
 
         public async Task<IActionResult> CareerSummaryDetails(int id)
             => View(await _playersDataService.GetCareerSummary(id));
 
-        public async Task<IActionResult> GetPlayerByName(string playerName)
-            => View(await _playersDataService.GetPlayersByName(playerName));
+        [HttpPost]
+        public async Task<IActionResult> GetPlayerByName(string name)
+        {
+           
+            return View("Index", await _playersDataService.GetPlayersByName(name));
+        }
+    
 
+        public async Task<IActionResult> RefreshStats()
+        {
+            await _playersDataService.AddAllCareerSummaries();
+            return View("Index");
+        }
     }
 }

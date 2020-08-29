@@ -10,11 +10,11 @@ namespace NbaApp.Data.Services.FilteringServices
 {
     public static class PointsFilter
     {
-        public static IEnumerable<DisplayFilteredStatsModel> FilterPoints (string valueToCompare, PlayersContext context)
+        public static async Task<IEnumerable<DisplayFilteredStatsModel>> FilterPoints (string valueToCompare, PlayersContext context)
         {
             var list = new List<DisplayFilteredStatsModel>();
            
-            var summaryList = context.CareerSummaries.Where(s => Convert.ToDouble(s.Ppg) >= Convert.ToDouble(valueToCompare)).ToList();
+            var summaryList = await context.CareerSummaries.Where(s => Convert.ToDouble(s.Ppg) >= Convert.ToDouble(valueToCompare)).ToListAsync();
             foreach (var item in summaryList)
             {
                 var display = new DisplayFilteredStatsModel();

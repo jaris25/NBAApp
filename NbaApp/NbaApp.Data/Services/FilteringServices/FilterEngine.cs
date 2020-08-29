@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace NbaApp.Data.Services.FilteringServices
 {
@@ -15,14 +16,14 @@ namespace NbaApp.Data.Services.FilteringServices
             _context = context;
         }
 
-        public IEnumerable<DisplayFilteredStatsModel> filterStatsCategory(StatsCategory category, string valueToCompare)
+        public async Task< IEnumerable<DisplayFilteredStatsModel>> filterStatsCategory(StatsCategory category, string valueToCompare)
         { 
             switch (category)
             {
                 case StatsCategory.Ppg:
-                    return PointsFilter.FilterPoints(valueToCompare, _context);
+                    return await PointsFilter.FilterPoints(valueToCompare, _context);
                 case StatsCategory.Apg:
-                    return AssistsFilter.FilterAssists(valueToCompare, _context);
+                    return await AssistsFilter.FilterAssists(valueToCompare, _context);
             }
             return null;
         }
