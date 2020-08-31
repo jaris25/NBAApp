@@ -16,7 +16,7 @@ namespace NbaApp.Data.Services.FilteringServices
             _context = context;
         }
 
-        public async Task< IEnumerable<DisplayFilteredStatsModel>> filterStatsCategory(StatsCategory category, string valueToCompare)
+        public async Task<IEnumerable<DisplayFilteredStatsModel>> filterStatsCategory(StatsCategory category, string valueToCompare)
         { 
             switch (category)
             {
@@ -24,6 +24,8 @@ namespace NbaApp.Data.Services.FilteringServices
                     return await PointsFilter.FilterPoints(valueToCompare, _context);
                 case StatsCategory.Apg:
                     return await AssistsFilter.FilterAssists(valueToCompare, _context);
+                case StatsCategory.Rpg:
+                    return await ReboundsFilter.FilterRebounds(valueToCompare, _context);
             }
             return null;
         }

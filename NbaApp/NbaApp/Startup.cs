@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Options;
 using NbaApp.Data.Models.Settings;
 using NbaApp.Data.Services;
 using NbaApp.Data.Services.FilteringServices;
+using System.IO;
 
 namespace NbaApp
 {
@@ -42,6 +44,10 @@ Configuration.GetSection(nameof(ApiHelperSettings)));
 
             services.AddSingleton<IPlayersDataService, PlayersDataService>();
             services.AddSingleton<PlayersContext>();
+            services.AddDbContext<PlayersContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetSection("PlayersDatabaseSettings").GetSection("ConnectionString").Value);
+            });
             services.AddSingleton<FilterEngine>();
 
             services.AddMvc();

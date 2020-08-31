@@ -47,7 +47,7 @@ namespace NbaApp.Controllers
 
         public async Task<IActionResult> RefreshStats()
         {
-            await _playersDataService.AddAllCareerSummaries();
+          //  await _playersDataService.AddAllCareerSummaries();
             return View("Index");
         }
     }

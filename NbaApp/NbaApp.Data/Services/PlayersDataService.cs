@@ -13,15 +13,19 @@ namespace NbaApp.Data.Services
 {
     public class PlayersDataService : IPlayersDataService
     {
-        private readonly PlayersContext _context;
-        private readonly IApiService _apiService;
-        private readonly IApiHelperSettings _apiHelperSettings;
+        //TODO: Move api service to console app for database updating!
 
-        public PlayersDataService(IApiService apiService, IApiHelperSettings apiHelperSettings, PlayersContext context)
+        private readonly PlayersContext _context;
+       // private readonly IApiService _apiService;
+        //private readonly IApiHelperSettings _apiHelperSettings;
+
+        public PlayersDataService(
+         //   IApiService apiService, IApiHelperSettings apiHelperSettings, 
+            PlayersContext context)
         {
-            _apiService = apiService;
-            _apiHelperSettings = apiHelperSettings;
-            _context = context;
+           // _apiService = apiService;
+            //_apiHelperSettings = apiHelperSettings;
+            _context = context?? throw new ArgumentNullException(nameof(_context));
         }
         //TODO: Add additional layer in services that will be used in home controller
         public async Task<IEnumerable<Player>> GetAllPlayers()
@@ -38,22 +42,24 @@ namespace NbaApp.Data.Services
             return summary;
         }
 
-        public async Task AddAllCareerSummaries()
-        {
-            var players = _context.Players.ToList();
-            foreach (var player in players)
-            {
-                var personId = player.PersonId;
 
-                var summary = await _apiService.LoadCareerSummary(_apiHelperSettings.StatsUri, personId, _apiHelperSettings.UriExtension);
-                if (summary != null)
-                {
-                    summary.Player = player;
-                    _context.CareerSummaries.Add(summary);
-                    _context.SaveChanges();
-                }
-            }
-        }
+
+        //public async Task AddAllCareerSummaries()
+        //{
+        //    var players = _context.Players.ToList();
+        //    foreach (var player in players)
+        //    {
+        //        var personId = player.PersonId;
+
+        //        var summary = await _apiService.LoadCareerSummary(_apiHelperSettings.StatsUri, personId, _apiHelperSettings.UriExtension);
+        //        if (summary != null)
+        //        {
+        //            summary.Player = player;
+        //            _context.CareerSummaries.Add(summary);
+        //            _context.SaveChanges();
+        //        }
+        //    }
+        //}
 
         public async Task<IEnumerable<Player>> GetPlayersByName(string name)
         {
