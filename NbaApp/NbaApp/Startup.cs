@@ -42,13 +42,15 @@ Configuration.GetSection(nameof(ApiHelperSettings)));
                 sp.GetRequiredService<IOptions<ApiHelperSettings>>().Value);
             services.AddHttpClient<IApiService, ApiService>();
 
-            services.AddSingleton<IPlayersDataService, PlayersDataService>();
-            services.AddSingleton<PlayersContext>();
+            services.AddScoped<IPlayersDataService, PlayersDataService>();
+
             services.AddDbContext<PlayersContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetSection("PlayersDatabaseSettings").GetSection("ConnectionString").Value);
+                options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=NbaApp;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                //Configuration.GetSection("PlayersDatabaseSettings").GetSection("ConnectionString").Value
             });
-            services.AddSingleton<FilterEngine>();
+            services.AddScoped<FilterEngine>();
+            services.AddScoped<DbContext, PlayersContext>();
 
             services.AddMvc();
             services.AddControllers();

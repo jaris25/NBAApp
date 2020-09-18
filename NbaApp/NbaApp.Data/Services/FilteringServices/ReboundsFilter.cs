@@ -3,8 +3,11 @@ using NbaApp.Data.Models.Filtering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using NbaApp.Data.Models.PlayersModels;
+
 
 namespace NbaApp.Data.Services.FilteringServices
 {
@@ -19,7 +22,7 @@ namespace NbaApp.Data.Services.FilteringServices
             {
                 var display = new DisplayFilteredStatsModel();
                 display.CareerSummary = item;
-                display.Player = item.Player;
+                display.Player =  context.Players.Where(p => p.Id == item.PlayerId).FirstOrDefault();
                 list.Add(display);
             }
             return list;
