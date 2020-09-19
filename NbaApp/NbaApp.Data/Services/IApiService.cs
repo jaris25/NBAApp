@@ -11,5 +11,6 @@ namespace NbaApp.Data.Services
     {
         Task<IEnumerable<Player>> LoadPlayers(string url);
         Task<CareerSummary> LoadCareerSummary(string url, int personId, string urlExtension);
+        Task AddAllPlayers();
     }
 }

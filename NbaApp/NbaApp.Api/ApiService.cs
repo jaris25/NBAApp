@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using NbaApp.Data.Models.PlayersModels;
+﻿using NbaApp.Data.Models.PlayersModels;
 using NbaApp.Data.Models.Settings;
 using NbaApp.Data.Models.StatisticsModels;
 using NbaApp.Data.Services;
@@ -9,7 +8,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace NbaApp.Data.Services
+namespace NbaApp.Api
 {
     public class ApiService : IApiService
     {

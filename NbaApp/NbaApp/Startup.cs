@@ -8,7 +8,6 @@ using Microsoft.Extensions.Options;
 using NbaApp.Data.Models.Settings;
 using NbaApp.Data.Services;
 using NbaApp.Data.Services.FilteringServices;
-using System.IO;
 
 namespace NbaApp
 {

@@ -1,26 +1,31 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using NbaApp.Data.Models.PlayersModels;
+using NbaApp.Data.Models.Settings;
+using NbaApp.Data.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace NbaApp.Api
 {
-    public class Program
+    class Program
     {
-        public static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
-        }
+            HttpClient httpClient = new HttpClient();
+            ApiHelperSettings api = new ApiHelperSettings();
+            var collection = new ServiceCollection();
+            collection.AddScoped<DbContext, PlayersContext>();
+            // ...
+            // Add other services
+            // ...
+            var serviceProvider = collection.BuildServiceProvider();
+            var context = serviceProvider.GetService<PlayersContext>();
+            ApiService apiService = new ApiService(httpClient, context, api);
+            await apiService.AddAllPlayers();
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+        }
     }
 }

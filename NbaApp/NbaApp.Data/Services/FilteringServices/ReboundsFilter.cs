@@ -11,7 +11,7 @@ using NbaApp.Data.Models.PlayersModels;
 
 namespace NbaApp.Data.Services.FilteringServices
 {
-    class ReboundsFilter
+    public class ReboundsFilter
     {
         public static async Task<IEnumerable<DisplayFilteredStatsModel>> FilterRebounds(string valueToCompare, PlayersContext context)
         {

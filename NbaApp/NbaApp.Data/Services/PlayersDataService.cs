@@ -1,10 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NbaApp.Data.Models.Filtering;
 using NbaApp.Data.Models.PlayersModels;
-using NbaApp.Data.Models.Settings;
 using NbaApp.Data.Models.StatisticsModels;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,25 +11,17 @@ namespace NbaApp.Data.Services
     public class PlayersDataService : IPlayersDataService
     {
         //TODO: Move api service to console app for database updating!
-
         private readonly PlayersContext _context;
-       // private readonly IApiService _apiService;
-        //private readonly IApiHelperSettings _apiHelperSettings;
 
-        public PlayersDataService(
-         //   IApiService apiService, IApiHelperSettings apiHelperSettings, 
-            PlayersContext context)
+        public PlayersDataService(PlayersContext context)
         {
-           // _apiService = apiService;
-            //_apiHelperSettings = apiHelperSettings;
-            _context = context?? throw new ArgumentNullException(nameof(_context));
+            _context = context ?? throw new ArgumentNullException(nameof(_context));
         }
         //TODO: Add additional layer in services that will be used in home controller
         public async Task<IEnumerable<Player>> GetAllPlayers()
         {
             var players = await _context.Players.ToListAsync();
             return players;
-
         }
 
         public async Task<CareerSummary> GetCareerSummary(int id)
