@@ -14,30 +14,16 @@ namespace NbaApp.Data.Services.FilteringServices
     {
         public static async Task<IEnumerable<DisplayFilteredStatsModel>> FilterPoints (string valueToCompare, PlayersContext context)
         {
-            var summaryList = await context.CareerSummaries.Where(s => Convert.ToDouble(s.Ppg) >= Convert.ToDouble(valueToCompare)).ToListAsync();
-            var filteredList = populateDisplayList(summaryList);
-            return filteredList;
+            var summaryList = await context.CareerSummaries.Where(s => Convert.ToDouble(s.Ppg) >= Convert.ToDouble(valueToCompare))
+                .Select(s => new DisplayFilteredStatsModel { Player = s.Player, CareerSummary = s }).ToListAsync();
+            return summaryList;
         }
 
         public static async Task<IEnumerable<DisplayFilteredStatsModel>> FilterTopScorers(PlayersContext context)
         {
-            var summaryList = await context.CareerSummaries.OrderByDescending(s => s.Ppg).Take(10).ToListAsync();
-            return populateDisplayList(summaryList);
-        }
-
-
-        //Another class needed so i could use this one in all filters that i have?
-        public static IEnumerable<DisplayFilteredStatsModel> populateDisplayList(IEnumerable<CareerSummary> summaryList)
-        {
-            var displayList = new List<DisplayFilteredStatsModel>();
-            foreach (var item in summaryList)
-            {
-                var display = new DisplayFilteredStatsModel();
-                display.CareerSummary = item;
-                display.Player = item.Player;
-                displayList.Add(display);
-            }
-            return displayList;
+            var summaryList = await context.CareerSummaries.OrderByDescending(s => s.Ppg)
+                .Select(s => new DisplayFilteredStatsModel { Player = s.Player, CareerSummary = s }).Take(10).ToListAsync();
+            return summaryList;
         }
     }
 }

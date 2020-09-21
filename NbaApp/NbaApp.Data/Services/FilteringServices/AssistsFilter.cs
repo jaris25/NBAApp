@@ -12,18 +12,11 @@ namespace NbaApp.Data.Services.FilteringServices
     {
         public static async Task<IEnumerable<DisplayFilteredStatsModel>> FilterAssists(string valueToCompare, PlayersContext context)
         {
-            var list = new List<DisplayFilteredStatsModel>();
-            
 
-            var summaryList = await context.CareerSummaries.Where(s => Convert.ToDouble(s.Apg) >= Convert.ToDouble(valueToCompare)).ToListAsync();
-            foreach (var item in summaryList)
-            {
-                var display = new DisplayFilteredStatsModel();
-                display.CareerSummary = item;
-                display.Player = item.Player;
-                list.Add(display);
-            }
-            return list;
+            var summaryList = await context.CareerSummaries.Where(s => Convert.ToDouble(s.Apg) >= Convert.ToDouble(valueToCompare))
+                .Select(s => new DisplayFilteredStatsModel { Player = s.Player, CareerSummary = s}).ToListAsync();
+
+            return summaryList;
         }
     }
 }

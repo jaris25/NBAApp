@@ -26,12 +26,11 @@ namespace NbaApp.Data.Services
 
         public async Task<CareerSummary> GetCareerSummary(int id)
         {
-            var player = _context.Players.First(p => p.Id == id);
+            var player = _context.Players.Find(id);
             var summary = await _context.CareerSummaries.FirstAsync(s => s.Player == player);
+            _context.CareerSummaries.Where(s => s.Player.IsActive==true&& s.Player.FirstName.Contains("a")).Include(s => s.Player).Where(s => s.Player.FirstName.Contains("a")).Select(c => new { c.OffReb, c.pFouls, smth = c.Spg, c.Player}).ToList();
             return summary;
         }
-
-
 
         //public async Task AddAllCareerSummaries()
         //{
@@ -52,8 +51,25 @@ namespace NbaApp.Data.Services
 
         public async Task<IEnumerable<Player>> GetPlayersByName(string name)
         {
-            var players = await _context.Players.Where(p => p.LastName == name || p.FirstName == name).ToListAsync();
+            var players = await _context.Players.Where(p => p.LastName.Contains(name) || p.FirstName.Contains(name)).ToListAsync();
             return players;
+        }
+
+        public Player GetPlayerById(int id)
+        {
+            var player = _context.Players.Where(p => p.Id == id).FirstOrDefault();
+            return player;
+        }
+
+        public void AddPlayer(Player player)
+        {
+            _context.Players.Add(player);
+            _context.SaveChanges();
+        }
+
+        public void Save()
+        {
+            _context.SaveChanges();
         }
     }
 }

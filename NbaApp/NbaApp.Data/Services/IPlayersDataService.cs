@@ -13,6 +13,10 @@ namespace NbaApp.Data.Services
         Task<IEnumerable<Player>> GetAllPlayers() ;
         Task<CareerSummary> GetCareerSummary(int id);
         Task<IEnumerable<Player>> GetPlayersByName(string name);
+        Player GetPlayerById(int id);
+        void AddPlayer(Player player);
+
+        void Save();
     //    Task AddAllCareerSummaries();
     }
 }

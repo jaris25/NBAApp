@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using NbaApp.Data.Models.PlayersModels;
 using NbaApp.Data.Models.StatisticsModels;
 using NbaApp.Data.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace NbaApp.Tests
         public async Task GetAllPlayers()
         {
             var options = new DbContextOptionsBuilder<PlayersContext>()
-                .UseInMemoryDatabase(databaseName: "PlayersDatabase")
+                .UseInMemoryDatabase(databaseName: $"PlayersDatabase{Guid.NewGuid()}")
                 .Options;
 
             using (var context = new PlayersContext(options))
@@ -39,7 +40,7 @@ namespace NbaApp.Tests
         public async Task GetPlayerByName()
         {
             var options = new DbContextOptionsBuilder<PlayersContext>()
-          .UseInMemoryDatabase(databaseName: "PlayersDatabase")
+          .UseInMemoryDatabase(databaseName: $"PlayersDatabase{Guid.NewGuid()}")
           .Options;
       
             using (var context = new PlayersContext(options))
@@ -58,7 +59,7 @@ namespace NbaApp.Tests
         public async Task GetCareerSummary()
         {
             var options = new DbContextOptionsBuilder<PlayersContext>()
-                .UseInMemoryDatabase(databaseName: "PlayersDatabase")
+                .UseInMemoryDatabase(databaseName: $"PlayersDatabase{Guid.NewGuid()}")
                 .Options;
 
             var playerMock = new Player { Id = 1, CollegeName = "Viko" };
