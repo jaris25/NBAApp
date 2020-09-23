@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace NbaApp.Data.Services.FilteringServices
 {
-    public static class AssistsFilter
+    public class AssistsFilter:IFilter
     {
-        public static async Task<IEnumerable<DisplayFilteredStatsModel>> FilterAssists(string valueToCompare, PlayersContext context)
+        public async Task<IEnumerable<DisplayFilteredStatsModel>> FilterStatistics(string valueToCompare, PlayersContext context)
         {
-
             var summaryList = await context.CareerSummaries.Where(s => Convert.ToDouble(s.Apg) >= Convert.ToDouble(valueToCompare))
                 .Select(s => new DisplayFilteredStatsModel { Player = s.Player, CareerSummary = s}).ToListAsync();
 

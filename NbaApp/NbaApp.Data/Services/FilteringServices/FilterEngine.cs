@@ -8,7 +8,7 @@ namespace NbaApp.Data.Services.FilteringServices
 {
     public class FilterEngine
     {
-
+        //What solution could i have? I have 10 stats categories, methods are the same except the category I use in Linq to vilter the values.
         private readonly PlayersContext _context;
 
         public FilterEngine(PlayersContext context)
@@ -17,17 +17,10 @@ namespace NbaApp.Data.Services.FilteringServices
         }
 
         public async Task<IEnumerable<DisplayFilteredStatsModel>> filterStatsCategory(StatsCategory category, string valueToCompare)
-        { 
-            switch (category)
-            {
-                case StatsCategory.Ppg:
-                    return await PointsFilter.FilterPoints(valueToCompare, _context);
-                case StatsCategory.Apg:
-                    return await AssistsFilter.FilterAssists(valueToCompare, _context);
-                case StatsCategory.Rpg:
-                    return await ReboundsFilter.FilterRebounds(valueToCompare, _context);
-            }
-            return null;
+        {
+            var factory = new FilterFactory();
+            var filter = factory.GetFilterForStatsCategory(category);
+            return await filter.FilterStatistics(valueToCompare, _context);
         }
     }
 }

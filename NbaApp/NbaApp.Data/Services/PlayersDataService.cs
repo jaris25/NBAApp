@@ -28,7 +28,7 @@ namespace NbaApp.Data.Services
         {
             var player = _context.Players.Find(id);
             var summary = await _context.CareerSummaries.FirstAsync(s => s.Player == player);
-            _context.CareerSummaries.Where(s => s.Player.IsActive==true&& s.Player.FirstName.Contains("a")).Include(s => s.Player).Where(s => s.Player.FirstName.Contains("a")).Select(c => new { c.OffReb, c.pFouls, smth = c.Spg, c.Player}).ToList();
+            _context.CareerSummaries.Where(s => s.Player.IsActive==true&& s.Player.FirstName.Contains("a")).Include(s => s.Player).Where(s => s.Player.FirstName.Contains("a")).Include(s => s.Player).Select(c => new { c.OffReb, c.pFouls, smth = c.Spg, c.Player}).ToList();
             return summary;
         }
 

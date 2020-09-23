@@ -11,21 +11,14 @@ using NbaApp.Data.Models.PlayersModels;
 
 namespace NbaApp.Data.Services.FilteringServices
 {
-    public class ReboundsFilter
+    public class ReboundsFilter: IFilter
     {
-        public static async Task<IEnumerable<DisplayFilteredStatsModel>> FilterRebounds(string valueToCompare, PlayersContext context)
+        public async Task<IEnumerable<DisplayFilteredStatsModel>> FilterStatistics(string valueToCompare, PlayersContext context)
         {
-            var list = new List<DisplayFilteredStatsModel>();
+            var summaryList = await context.CareerSummaries.Where(s => Convert.ToDouble(s.Rpg) >= Convert.ToDouble(valueToCompare))
+                .Select(s => new DisplayFilteredStatsModel {Player = s.Player, CareerSummary = s}).ToListAsync();
 
-            var summaryList = await context.CareerSummaries.Where(s => Convert.ToDouble(s.Rpg) >= Convert.ToDouble(valueToCompare)).ToListAsync();
-            foreach (var item in summaryList)
-            {
-                var display = new DisplayFilteredStatsModel();
-                display.CareerSummary = item;
-                display.Player =  context.Players.Where(p => p.Id == item.PlayerId).FirstOrDefault();
-                list.Add(display);
-            }
-            return list;
+            return summaryList;
         }
     }
 }
